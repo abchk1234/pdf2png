@@ -9,16 +9,14 @@ class MyWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
 
-        self.set_size_request(200, 100)
+        self.set_size_request(100, 20)
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
         self.add(vbox)
 
         self.entry = Gtk.Entry()
         self.entry.set_text("Resolution Number")
         vbox.pack_start(self.entry, True, True, 0)
-        hbox = Gtk.Box(spacing=6)
-        vbox.pack_start(hbox, True, True, 0)
 
         self.button1 = Gtk.Button(label="Select file")
         self.button1.connect("clicked", self.button_clicked)
