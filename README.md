@@ -2,7 +2,7 @@ pdf2png
 =======
 <img src="img/pdf2png.png" alt="" /><img src="img/pdf2png-two.png" alt="" />
 
-Convert PDF book's cover page to a PNG image easily
+If you are collecting a lot of books and later decide to make a catalog, this program will save a lot of your time.
 
 ## Requirements
 
