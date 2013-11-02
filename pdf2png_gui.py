@@ -3,6 +3,19 @@ import os
 import subprocess
 from gi.repository import Gtk
 
+class DialogExample(Gtk.Dialog):
+
+    def __init__(self, parent):
+        Gtk.Dialog.__init__(self, "Warning!", parent, 0)
+
+        self.set_default_size(150, 20)
+
+        label = Gtk.Label("Please next time type a number in the field")
+
+        box = self.get_content_area()
+        box.add(label)
+        self.show_all()
+
 
 class MyWindow(Gtk.Window):
 
@@ -23,18 +36,23 @@ class MyWindow(Gtk.Window):
         vbox.pack_start(self.button1, True, True, 0)
 
     def button_clicked(self, widget):
-        chooser_dialog = Gtk.FileChooserDialog(title="Select file"
-        ,action=Gtk.FileChooserAction.OPEN
-        ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
-        filter_pdf = Gtk.FileFilter()
-        filter_pdf.set_name("PDF Files")
-        filter_pdf.add_pattern("*.pdf")
-        chooser_dialog.add_filter(filter_pdf)
-        chooser_dialog.run()
-        filename = chooser_dialog.get_filename()
-        if filename is not None:
-            pdf_to_png(self, chooser_dialog, filename)
-        chooser_dialog.destroy()
+        userInput = self.entry.get_text()
+        if userInput.isdigit() == False:
+            DialogExample(self)
+        else:
+            chooser_dialog = Gtk.FileChooserDialog(title="Select file"
+            ,action=Gtk.FileChooserAction.OPEN
+            ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
+            filter_pdf = Gtk.FileFilter()
+            filter_pdf.set_name("PDF Files")
+            filter_pdf.add_pattern("*.pdf")
+            chooser_dialog.add_filter(filter_pdf)
+            chooser_dialog.run()
+            filename = chooser_dialog.get_filename()
+            
+            if filename is not None:
+                pdf_to_png(self, chooser_dialog, filename)
+            chooser_dialog.destroy()
 
 def pdf_to_png(self, chooser_dialog, pdffilepath):
     pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
