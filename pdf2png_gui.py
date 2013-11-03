@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os
 import subprocess
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 
 class MainWindow(Gtk.Window):
@@ -10,7 +10,7 @@ class MainWindow(Gtk.Window):
         Gtk.Window.__init__(self, title="PDF to PNG")
         self.set_border_width(10)
         self.set_size_request(100, 20)
-
+        self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
         vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.add(vbox)
 
