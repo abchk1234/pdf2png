@@ -23,8 +23,8 @@ class MyWindow(Gtk.Window):
         vbox.pack_start(self.button1, True, True, 0)
 
     def button_clicked(self, widget):
-        userInput = self.entry.get_text()
-        if userInput.isdigit() == False:
+        resolution_number = self.entry.get_text().isdigit()
+        if resolution_number is False:
             WarningDialog(self)
         else:
             chooser_dialog = Gtk.FileChooserDialog(title="Select file"
@@ -36,7 +36,7 @@ class MyWindow(Gtk.Window):
             chooser_dialog.add_filter(filter_pdf)
             chooser_dialog.run()
             filename = chooser_dialog.get_filename()
-            
+
             if filename is not None:
                 pdf_to_png(self, chooser_dialog, filename)
             chooser_dialog.destroy()
