@@ -4,7 +4,7 @@ import subprocess
 from gi.repository import Gtk
 
 
-class MyWindow(Gtk.Window):
+class MainWindow(Gtk.Window):
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
@@ -52,14 +52,14 @@ def pdf_to_png(self, chooser_dialog, pdffilepath):
 
 
 def WarningDialog(self):
-    dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO,
+    dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
         Gtk.ButtonsType.OK, "Warning !")
     dialog.format_secondary_text(
         "Please type a number in the field")
     dialog.run()
     dialog.destroy()
 
-win = MyWindow()
+win = MainWindow()
 win.connect("delete-event", Gtk.main_quit)
 win.show_all()
 Gtk.main()
