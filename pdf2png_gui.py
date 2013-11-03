@@ -25,7 +25,7 @@ class MainWindow(Gtk.Window):
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
         if resolution_number is False:
-            WarningDialog(self)
+            self.RaiseWarning()
         else:
             chooser_dialog = Gtk.FileChooserDialog(title="Select file"
             ,action=Gtk.FileChooserAction.OPEN
@@ -38,26 +38,25 @@ class MainWindow(Gtk.Window):
             filename = chooser_dialog.get_filename()
 
             if filename is not None:
-                pdf_to_png(self, chooser_dialog, filename)
+                self.pdf_to_png(chooser_dialog, filename)
             chooser_dialog.destroy()
 
-def pdf_to_png(self, chooser_dialog, pdffilepath):
-    pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
-    resolution = self.entry.get_text()
-    arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage=1", "-dLastPage=1",
-              "-sOutputFile=%s.png" % pdfname, "-sDEVICE=png16m",
-              "-r%s" % resolution, pdffilepath]
-    sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    sp.communicate()
+    def RaiseWarning(self):
+        dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
+            Gtk.ButtonsType.OK, "Warning !")
+        dialog.format_secondary_text(
+            "Please type a number in the field")
+        dialog.run()
+        dialog.destroy()
 
-
-def WarningDialog(self):
-    dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
-        Gtk.ButtonsType.OK, "Warning !")
-    dialog.format_secondary_text(
-        "Please type a number in the field")
-    dialog.run()
-    dialog.destroy()
+    def pdf_to_png(self, chooser_dialog, pdffilepath):
+        pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
+        resolution = self.entry.get_text()
+        arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage=1", "-dLastPage=1",
+                  "-sOutputFile=%s.png" % pdfname, "-sDEVICE=png16m",
+                  "-r%s" % resolution, pdffilepath]
+        sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        sp.communicate()
 
 win = MainWindow()
 win.connect("delete-event", Gtk.main_quit)
