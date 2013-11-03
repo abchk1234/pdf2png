@@ -13,12 +13,14 @@ class MainWindow(Gtk.Window):
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
         vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.add(vbox)
-
+        #label = Gtk.Label(label="Resolution Number")
+        #vbox.pack_start(label, False, False, 0)
         self.entry = Gtk.Entry()
         self.entry.set_text("Resolution Number")
         vbox.pack_start(self.entry, True, True, 0)
 
-        self.button1 = Gtk.Button(label="Select file")
+        #self.button1 = Gtk.Button(label="Select file")
+        self.button1 = Gtk.ToolButton(stock_id=Gtk.STOCK_INDEX)
         self.button1.connect("clicked", self.button_clicked)
         vbox.pack_start(self.button1, True, True, 0)
 
