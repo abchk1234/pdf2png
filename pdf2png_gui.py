@@ -8,10 +8,10 @@ class MainWindow(Gtk.Window):
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
-
+        self.set_border_width(10)
         self.set_size_request(100, 20)
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         self.add(vbox)
 
         self.entry = Gtk.Entry()
