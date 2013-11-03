@@ -3,19 +3,6 @@ import os
 import subprocess
 from gi.repository import Gtk
 
-class DialogExample(Gtk.Dialog):
-
-    def __init__(self, parent):
-        Gtk.Dialog.__init__(self, "Warning!", parent, 0)
-
-        self.set_default_size(150, 20)
-
-        label = Gtk.Label("Please next time type a number in the field")
-
-        box = self.get_content_area()
-        box.add(label)
-        self.show_all()
-
 
 class MyWindow(Gtk.Window):
 
@@ -38,7 +25,7 @@ class MyWindow(Gtk.Window):
     def button_clicked(self, widget):
         userInput = self.entry.get_text()
         if userInput.isdigit() == False:
-            DialogExample(self)
+            WarningDialog(self)
         else:
             chooser_dialog = Gtk.FileChooserDialog(title="Select file"
             ,action=Gtk.FileChooserAction.OPEN
@@ -62,6 +49,16 @@ def pdf_to_png(self, chooser_dialog, pdffilepath):
               "-r%s" % resolution, pdffilepath]
     sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     sp.communicate()
+
+class WarningDialog(Gtk.Dialog):
+
+    def __init__(self, parent):
+        Gtk.Dialog.__init__(self, "Warning!", parent, 0)
+        self.set_default_size(150, 20)
+        label = Gtk.Label("Please type a number in the field")
+        box = self.get_content_area()
+        box.add(label)
+        self.show_all()
 
 win = MyWindow()
 win.connect("delete-event", Gtk.main_quit)
