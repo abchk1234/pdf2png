@@ -44,9 +44,9 @@ class MainWindow(Gtk.Window):
             chooser_dialog.destroy()
 
     def RaiseWarning(self):
-        no_way = self.entry.get_text()
+        display_user_input = self.entry.get_text()
         dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
-            Gtk.ButtonsType.OK, "Warning %r !" % no_way)
+            Gtk.ButtonsType.OK, "Warning %r !" % display_user_input)
         dialog.format_secondary_text(
             "Please type a number in the field" )
         dialog.run()
