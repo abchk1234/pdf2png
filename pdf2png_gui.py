@@ -18,12 +18,11 @@ class MainWindow(Gtk.Window):
         self.entry = Gtk.Entry()
         self.entry.set_text("Resolution Number")
         vbox.pack_start(self.entry, True, True, 0)
-        
+
         grid = Gtk.Grid()
         vbox.add(grid)
         def reveal_child(button):
-            resolution_number = self.entry.get_text().isdigit()
-            if resolution_number is False:
+            if self.entry.get_text().isdigit() is False:
                 revealer.set_reveal_child(True)
             else:
                 revealer.set_reveal_child(False)
@@ -46,7 +45,8 @@ class MainWindow(Gtk.Window):
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
         if resolution_number is False:
-            self.RaiseWarning()
+            #self.RaiseWarning()
+            print("")
         else:
             chooser_dialog = Gtk.FileChooserDialog(title="Select file"
             ,action=Gtk.FileChooserAction.OPEN
@@ -62,8 +62,7 @@ class MainWindow(Gtk.Window):
                 self.pdf_to_png(chooser_dialog, filename)
             chooser_dialog.destroy()
 
-    def RaiseWarning(self):
-        print("")
+    #def RaiseWarning(self):
         #display_user_input = self.entry.get_text()
         #dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING,
             #Gtk.ButtonsType.OK, "Warning %r !" % display_user_input)
