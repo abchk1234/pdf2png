@@ -85,7 +85,9 @@ class MainWindow(Gtk.Window):
         #self.button1.connect("clicked", reveal_child)
         vbox.pack_start(self.button1, True, True, 0)
 
-win = MainWindow()
-win.connect("delete-event", Gtk.main_quit)
-win.show_all()
-Gtk.main()
+
+if __name__ == '__main__':
+    win = MainWindow()
+    win.connect("delete-event", Gtk.main_quit)
+    win.show_all()
+    Gtk.main()
