@@ -8,9 +8,7 @@ class MainWindow(Gtk.Window):
 
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
-        if resolution_number is False:
-            self.RaiseWarning()
-        else:
+        if resolution_number is not False:
             chooser_dialog = Gtk.FileChooserDialog(title="Select file"
             ,action=Gtk.FileChooserAction.OPEN
             ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
@@ -24,6 +22,8 @@ class MainWindow(Gtk.Window):
             if filename is not None:
                 self.pdf_to_png(chooser_dialog, filename)
             chooser_dialog.destroy()
+        else:
+            self.RaiseWarning()
 
     def RaiseWarning(self):
         display_user_input = self.entry.get_text()
