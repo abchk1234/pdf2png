@@ -2,7 +2,7 @@ pdf2png
 =======
 <img src="img/pdf2png.png" alt="" /><img src="img/pdf2png-two.png" alt="" />
 
-If you are collecting a lot of books and later decide to make a catalog, this program will save a lot of your time.
+The program has grown to full blown pdf to png converter. GNU/Linux users will be more than happier to use it :)
 
 ## Requirements
 
