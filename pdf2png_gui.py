@@ -7,7 +7,7 @@ from gi.repository import Gtk, Gdk
 class MainWindow(Gtk.Window):
 
     #def comboboxtext_changed(self, comboboxtext):
-    	#comboboxtext.get_active_text()
+            #comboboxtext.get_active_text()
 
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
@@ -41,7 +41,7 @@ class MainWindow(Gtk.Window):
         pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
         resolution = self.entry.get_text()
         arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage=%s" % self.spinbutton.get_text(), "-dLastPage=%s" % self.spinbutton2.get_text(),
-                  "-sOutputFile=%s" % pdfname + " page %01d.png", "-sDEVICE=%s" % self.comboboxtext.get_active_text(),
+                  "-sOutputFile=%s" % pdfname + " page %01d." + "%s" % self.comboboxtext2.get_active_text(), "-sDEVICE=%s" % self.comboboxtext.get_active_text(),
                   "-r%s" % resolution, pdffilepath]
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sp.communicate()
@@ -93,12 +93,29 @@ class MainWindow(Gtk.Window):
         self.spinbutton2 = Gtk.SpinButton(adjustment=adjustment, climb_rate=1, digits=0)
         vbox.add(self.spinbutton2)
 
+        label = Gtk.Label(label="Image extension:")
+        vbox.add(label)
+        self.comboboxtext2 = Gtk.ComboBoxText()
+        self.comboboxtext2.append("png", "png")
+        self.comboboxtext2.append("jpg", "jpg")
+        self.comboboxtext2.append("bmp", "bmp")
+        self.comboboxtext2.append("tiff", "tiff")
+        self.comboboxtext2.set_active(0)
+        vbox.add(self.comboboxtext2)
+
         label = Gtk.Label(label="sDevice")
         vbox.add(label)
         self.comboboxtext = Gtk.ComboBoxText()
         self.comboboxtext.append("png16m", "png16m")
         self.comboboxtext.append("pngalpha", "pngalpha")
         self.comboboxtext.append("pnggray", "pnggray")
+        self.comboboxtext.append("jpeg", "jpeg")
+        self.comboboxtext.append("jpegcmyk", "jpegcmyk")
+        self.comboboxtext.append("jpeggray", "jpeggray")
+        self.comboboxtext.append("bmp16m", "bmp16m")
+        self.comboboxtext.append("bmpgray", "bmpgray")
+        self.comboboxtext.append("tiff24nc", "tiff24nc")
+        self.comboboxtext.append("tiffgray", "tiffgray")
         self.comboboxtext.set_active(0)
         #self.comboboxtext.connect("changed", self.comboboxtext_changed)
         vbox.add(self.comboboxtext)
