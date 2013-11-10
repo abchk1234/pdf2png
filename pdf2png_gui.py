@@ -10,23 +10,26 @@ class MainWindow(Gtk.Window):
     	#comboboxtext.get_active_text()
 
     def button_clicked(self, widget):
-        resolution_number = self.entry.get_text().isdigit()
-        if resolution_number is not False:
-            chooser_dialog = Gtk.FileChooserDialog(title="Select file"
-            ,action=Gtk.FileChooserAction.OPEN
-            ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
-            filter_pdf = Gtk.FileFilter()
-            filter_pdf.set_name("PDF Files")
-            filter_pdf.add_pattern("*.pdf")
-            chooser_dialog.add_filter(filter_pdf)
-            chooser_dialog.run()
-            filename = chooser_dialog.get_filename()
-
-            if filename is not None:
-                self.pdf_to_png(chooser_dialog, filename)
-            chooser_dialog.destroy()
+        if self.spinbutton2.get_text() < self.spinbutton.get_text():
+            print(self.spinbutton.get_text() + self.spinbutton2.get_text())
         else:
-            self.RaiseWarning()
+            resolution_number = self.entry.get_text().isdigit()
+            if resolution_number is not False:
+                chooser_dialog = Gtk.FileChooserDialog(title="Select file"
+                ,action=Gtk.FileChooserAction.OPEN
+                ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
+                filter_pdf = Gtk.FileFilter()
+                filter_pdf.set_name("PDF Files")
+                filter_pdf.add_pattern("*.pdf")
+                chooser_dialog.add_filter(filter_pdf)
+                chooser_dialog.run()
+                filename = chooser_dialog.get_filename()
+    
+                if filename is not None:
+                    self.pdf_to_png(chooser_dialog, filename)
+                chooser_dialog.destroy()
+            else:
+                self.RaiseWarning()
 
     def RaiseWarning(self):
         display_user_input = self.entry.get_text()
@@ -59,7 +62,7 @@ class MainWindow(Gtk.Window):
         vbox.pack_start(label, False, False, 0)
 
         self.entry = Gtk.Entry()
-        self.entry.set_text("")
+        self.entry.set_text("100")
         self.entry.set_max_length(4)
         vbox.pack_start(self.entry, True, True, 0)
 
@@ -84,13 +87,13 @@ class MainWindow(Gtk.Window):
         label = Gtk.Label(label="From page number:")
         vbox.add(label)
         adjustment = Gtk.Adjustment(value=1, lower=1, upper=9999, step_increment=1)
-        self.spinbutton = Gtk.SpinButton(adjustment=adjustment)
+        self.spinbutton = Gtk.SpinButton(adjustment=adjustment, climb_rate=1, digits=0)
         vbox.add(self.spinbutton)
 
         label = Gtk.Label(label="To:")
         vbox.add(label)
         adjustment = Gtk.Adjustment(value=1, lower=1, upper=9999, step_increment=1)
-        self.spinbutton2 = Gtk.SpinButton(adjustment=adjustment)
+        self.spinbutton2 = Gtk.SpinButton(adjustment=adjustment, climb_rate=1, digits=0)
         vbox.add(self.spinbutton2)
 
         label = Gtk.Label(label="sDevice")
