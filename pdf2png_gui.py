@@ -10,26 +10,23 @@ class MainWindow(Gtk.Window):
     	#comboboxtext.get_active_text()
 
     def button_clicked(self, widget):
-        if self.spinbutton2.get_text() < self.spinbutton.get_text():
-            print(self.spinbutton.get_text() + self.spinbutton2.get_text())
+        resolution_number = self.entry.get_text().isdigit()
+        if resolution_number is not False:
+            chooser_dialog = Gtk.FileChooserDialog(title="Select file"
+            ,action=Gtk.FileChooserAction.OPEN
+            ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
+            filter_pdf = Gtk.FileFilter()
+            filter_pdf.set_name("PDF Files")
+            filter_pdf.add_pattern("*.pdf")
+            chooser_dialog.add_filter(filter_pdf)
+            chooser_dialog.run()
+            filename = chooser_dialog.get_filename()
+
+            if filename is not None:
+                self.pdf_to_png(chooser_dialog, filename)
+            chooser_dialog.destroy()
         else:
-            resolution_number = self.entry.get_text().isdigit()
-            if resolution_number is not False:
-                chooser_dialog = Gtk.FileChooserDialog(title="Select file"
-                ,action=Gtk.FileChooserAction.OPEN
-                ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
-                filter_pdf = Gtk.FileFilter()
-                filter_pdf.set_name("PDF Files")
-                filter_pdf.add_pattern("*.pdf")
-                chooser_dialog.add_filter(filter_pdf)
-                chooser_dialog.run()
-                filename = chooser_dialog.get_filename()
-    
-                if filename is not None:
-                    self.pdf_to_png(chooser_dialog, filename)
-                chooser_dialog.destroy()
-            else:
-                self.RaiseWarning()
+            self.RaiseWarning()
 
     def RaiseWarning(self):
         display_user_input = self.entry.get_text()
