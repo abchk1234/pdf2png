@@ -5,27 +5,28 @@ from gi.repository import Gtk, Gdk
 
 
 class MainWindow(Gtk.Window):
-    def button_clicked(self, widget):
-        if self.spinbutton.get_text() > self.spinbutton2.get_text():
-            print("From and to page numbers are reversed")
-        else:
-            resolution_number = self.entry.get_text().isdigit()
-            if resolution_number is not False:
-                chooser_dialog = Gtk.FileChooserDialog(title="Select file"
-                ,action=Gtk.FileChooserAction.OPEN
-                ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
-                filter_pdf = Gtk.FileFilter()
-                filter_pdf.set_name("PDF Files")
-                filter_pdf.add_pattern("*.pdf")
-                chooser_dialog.add_filter(filter_pdf)
-                chooser_dialog.run()
-                filename = chooser_dialog.get_filename()
 
-                if filename is not None:
-                    self.pdf_to_png(chooser_dialog, filename)
-                chooser_dialog.destroy()
-            else:
-                self.RaiseWarning()
+    #def comboboxtext_changed(self, comboboxtext):
+    	#comboboxtext.get_active_text()
+
+    def button_clicked(self, widget):
+        resolution_number = self.entry.get_text().isdigit()
+        if resolution_number is not False:
+            chooser_dialog = Gtk.FileChooserDialog(title="Select file"
+            ,action=Gtk.FileChooserAction.OPEN
+            ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
+            filter_pdf = Gtk.FileFilter()
+            filter_pdf.set_name("PDF Files")
+            filter_pdf.add_pattern("*.pdf")
+            chooser_dialog.add_filter(filter_pdf)
+            chooser_dialog.run()
+            filename = chooser_dialog.get_filename()
+
+            if filename is not None:
+                self.pdf_to_png(chooser_dialog, filename)
+            chooser_dialog.destroy()
+        else:
+            self.RaiseWarning()
 
     def RaiseWarning(self):
         display_user_input = self.entry.get_text()
@@ -35,11 +36,12 @@ class MainWindow(Gtk.Window):
             "Please type a number in the field" )
         dialog.run()
         dialog.destroy()
+
     def pdf_to_png(self, chooser_dialog, pdffilepath):
         pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
         resolution = self.entry.get_text()
         arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage=%s" % self.spinbutton.get_text(), "-dLastPage=%s" % self.spinbutton2.get_text(),
-                  "-sOutputFile=%s" % pdfname + " page %01d.png", "-sDEVICE=png16m",
+                  "-sOutputFile=%s" % pdfname + " page %01d.png", "-sDEVICE=%s" % self.comboboxtext.get_active_text(),
                   "-r%s" % resolution, pdffilepath]
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sp.communicate()
@@ -91,12 +93,21 @@ class MainWindow(Gtk.Window):
         self.spinbutton2 = Gtk.SpinButton(adjustment=adjustment)
         vbox.add(self.spinbutton2)
 
+        label = Gtk.Label(label="sDevice")
+        vbox.add(label)
+        self.comboboxtext = Gtk.ComboBoxText()
+        self.comboboxtext.append("png16m", "png16m")
+        self.comboboxtext.append("pngalpha", "pngalpha")
+        self.comboboxtext.append("pnggray", "pnggray")
+        self.comboboxtext.set_active(0)
+        #self.comboboxtext.connect("changed", self.comboboxtext_changed)
+        vbox.add(self.comboboxtext)
+
         #self.button1 = Gtk.Button(label="Select file")
         self.button1 = Gtk.ToolButton(stock_id=Gtk.STOCK_INDEX)
         self.button1.connect("clicked", self.button_clicked)
         #self.button1.connect("clicked", reveal_child)
         vbox.pack_start(self.button1, True, True, 0)
-
 
 if __name__ == '__main__':
     win = MainWindow()
