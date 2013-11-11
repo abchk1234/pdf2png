@@ -101,7 +101,6 @@ class MainWindow(Gtk.Window):
         label = Gtk.Label(label="Image format")
         grid.attach(label, Gtk.PositionType.LEFT, 5, 1, 1)
         self.comboboxtext2 = Gtk.ComboBoxText()
-        self.comboboxtext2.append("", "")
         self.comboboxtext2.append("png", "png")
         self.comboboxtext2.append("jpg", "jpg")
         self.comboboxtext2.append("bmp", "bmp")
