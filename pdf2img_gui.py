@@ -75,6 +75,7 @@ class MainWindow(Gtk.Window):
         grid.attach(label, Gtk.PositionType.LEFT, 1, 1, 1)
 
         self.entry = Gtk.Entry()
+        self.entry.set_width_chars(1)
         self.entry.set_text("100")
         self.entry.set_max_length(4)
         grid.attach(self.entry, Gtk.PositionType.LEFT, 2, 1, 1)
@@ -126,6 +127,7 @@ class MainWindow(Gtk.Window):
         grid.attach(self.comboboxtext, Gtk.PositionType.RIGHT, 6, 1, 1)
 
         label = Gtk.Label(label="Select PDF file")
+        label.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1, 1, 1, 1))
         vbox.add(label)
         #self.button1 = Gtk.Button(label="Select file")
         self.button1 = Gtk.ToolButton(stock_id=Gtk.STOCK_INDEX)
