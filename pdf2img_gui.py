@@ -12,11 +12,11 @@ class MainWindow(Gtk.Window):
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
         if resolution_number is not False:
-            chooser_dialog = Gtk.FileChooserDialog(title="Select file"
+            chooser_dialog = Gtk.FileChooserDialog(title="Select PDF file"
             ,action=Gtk.FileChooserAction.OPEN
             ,buttons=["Convert", Gtk.ResponseType.OK, "Cancel", Gtk.ResponseType.CANCEL])
             filter_pdf = Gtk.FileFilter()
-            filter_pdf.set_name("PDF Files")
+            filter_pdf.set_name("PDF Filter")
             filter_pdf.add_pattern("*.pdf")
             chooser_dialog.add_filter(filter_pdf)
             chooser_dialog.run()
@@ -93,7 +93,7 @@ class MainWindow(Gtk.Window):
         self.spinbutton2 = Gtk.SpinButton(adjustment=adjustment, climb_rate=1, digits=0)
         vbox.add(self.spinbutton2)
 
-        label = Gtk.Label(label="Image extension:")
+        label = Gtk.Label(label="Image extension")
         vbox.add(label)
         self.comboboxtext2 = Gtk.ComboBoxText()
         self.comboboxtext2.append("png", "png")
@@ -120,6 +120,8 @@ class MainWindow(Gtk.Window):
         #self.comboboxtext.connect("changed", self.comboboxtext_changed)
         vbox.add(self.comboboxtext)
 
+        label = Gtk.Label(label="Select PDF file")
+        vbox.add(label)
         #self.button1 = Gtk.Button(label="Select file")
         self.button1 = Gtk.ToolButton(stock_id=Gtk.STOCK_INDEX)
         self.button1.connect("clicked", self.button_clicked)
