@@ -1,6 +1,6 @@
 pdf2img
 =======
-<img src="img/pdf2img.png" alt="" /><img src="img/pdf2img-2.png" alt="" /><img src="img/pdf2img-3.png" alt="" /><img src="img/pdf2img-two.png" alt="" />
+<img src="img/pdf2img.png" alt="" /><img src="img/pdf2img-two.png" alt="" />
 
 The program has grown to full blown pdf to png converter.Despite it's name, pdf2img supports up to 4 different image extensions and 10 different sdevices.
 
