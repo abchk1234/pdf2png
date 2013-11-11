@@ -47,7 +47,7 @@ class MainWindow(Gtk.Window):
         sp.communicate()
 
     def __init__(self):
-        Gtk.Window.__init__(self, title="PDF to PNG")
+        Gtk.Window.__init__(self, title="PDF to IMG")
         self.set_border_width(10)
         self.set_size_request(200, 20)
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
