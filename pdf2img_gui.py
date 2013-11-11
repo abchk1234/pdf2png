@@ -71,7 +71,7 @@ class MainWindow(Gtk.Window):
         grid.set_column_spacing(5)
         vbox.add(grid)
 
-        label = Gtk.Label(label="Resolution Number")
+        label = Gtk.Label(label="   Resolution    ")
         grid.attach(label, Gtk.PositionType.LEFT, 1, 1, 1)
 
         self.entry = Gtk.Entry()
