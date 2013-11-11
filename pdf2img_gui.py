@@ -10,7 +10,7 @@ class MainWindow(Gtk.Window):
         aboutdialog = Gtk.AboutDialog()
         aboutdialog.set_name("About")
         aboutdialog.set_version("v0.2")
-        aboutdialog.set_comments("Convert PDF book to multiple images\nin various formats with a single mouse click")
+        aboutdialog.set_comments("Convert PDF to multiple images\nin various formats with a single mouse click")
         aboutdialog.set_website("http://linux.sytes.net/")
         aboutdialog.set_website_label("Developer Website")
         aboutdialog.set_authors(["Aaron Caffrey"])
@@ -59,15 +59,15 @@ class MainWindow(Gtk.Window):
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to IMG")
-        self.set_border_width(10)
+        self.set_border_width(6)
         self.set_size_request(200, 20)
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=13)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(vbox)
 
         grid = Gtk.Grid()
-        grid.set_row_spacing(5)
+        grid.set_row_spacing(7)
         grid.set_column_spacing(5)
         vbox.add(grid)
 
@@ -123,7 +123,6 @@ class MainWindow(Gtk.Window):
         self.comboboxtext.append("tiff24nc", "tiff24nc")
         self.comboboxtext.append("tiffgray", "tiffgray")
         self.comboboxtext.set_active(0)
-        #self.comboboxtext.connect("changed", self.comboboxtext_changed)
         grid.attach(self.comboboxtext, Gtk.PositionType.RIGHT, 6, 1, 1)
 
         label = Gtk.Label(label="Select PDF file")
