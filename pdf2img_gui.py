@@ -17,9 +17,22 @@ class MainWindow(Gtk.Window):
         aboutdialog.run()
         aboutdialog.destroy()
 
-    #def comboboxtext_changed(self, comboboxtext):
-            #comboboxtext.get_active_text()
-
+    def comboboxtext_changed(self, comboboxtext):
+            active = comboboxtext.get_active_text()
+            if active == "png":
+                self.comboboxtext.append("png16m", "png16m")
+                self.comboboxtext.append("pngalpha", "pngalpha")
+                self.comboboxtext.append("pnggray", "pnggray")
+            if active == "jpg":
+                self.comboboxtext.append("jpeg", "jpeg")
+                self.comboboxtext.append("jpegcmyk", "jpegcmyk")
+                self.comboboxtext.append("jpeggray", "jpeggray")
+            if active == "bmp":
+                self.comboboxtext.append("bmp16m", "bmp16m")
+                self.comboboxtext.append("bmpgray", "bmpgray")
+            if active == "tiff":
+                self.comboboxtext.append("tiff24nc", "tiff24nc")
+                self.comboboxtext.append("tiffgray", "tiffgray")
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
         if resolution_number is not False:
@@ -63,7 +76,7 @@ class MainWindow(Gtk.Window):
         self.set_size_request(200, 20)
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
 
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=13)
         self.add(vbox)
 
         grid = Gtk.Grid()
@@ -120,26 +133,19 @@ class MainWindow(Gtk.Window):
         label = Gtk.Label(label="Image format")
         grid.attach(label, Gtk.PositionType.LEFT, 5, 1, 1)
         self.comboboxtext2 = Gtk.ComboBoxText()
+        self.comboboxtext2.append("", "")
         self.comboboxtext2.append("png", "png")
         self.comboboxtext2.append("jpg", "jpg")
         self.comboboxtext2.append("bmp", "bmp")
         self.comboboxtext2.append("tiff", "tiff")
         self.comboboxtext2.set_active(0)
+        self.comboboxtext2.connect("changed", self.comboboxtext_changed)
         grid.attach(self.comboboxtext2, Gtk.PositionType.LEFT, 6, 1, 1)
 
         label = Gtk.Label(label="sDevice")
         grid.attach(label, Gtk.PositionType.RIGHT, 5, 1, 1)
         self.comboboxtext = Gtk.ComboBoxText()
-        self.comboboxtext.append("png16m", "png16m")
-        self.comboboxtext.append("pngalpha", "pngalpha")
-        self.comboboxtext.append("pnggray", "pnggray")
-        self.comboboxtext.append("jpeg", "jpeg")
-        self.comboboxtext.append("jpegcmyk", "jpegcmyk")
-        self.comboboxtext.append("jpeggray", "jpeggray")
-        self.comboboxtext.append("bmp16m", "bmp16m")
-        self.comboboxtext.append("bmpgray", "bmpgray")
-        self.comboboxtext.append("tiff24nc", "tiff24nc")
-        self.comboboxtext.append("tiffgray", "tiffgray")
+
         self.comboboxtext.set_active(0)
         #self.comboboxtext.connect("changed", self.comboboxtext_changed)
         grid.attach(self.comboboxtext, Gtk.PositionType.RIGHT, 6, 1, 1)
