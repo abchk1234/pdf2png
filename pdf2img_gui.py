@@ -33,6 +33,7 @@ class MainWindow(Gtk.Window):
             if active == "tiff":
                 self.comboboxtext.append("tiff24nc", "tiff24nc")
                 self.comboboxtext.append("tiffgray", "tiffgray")
+
     def button_clicked(self, widget):
         resolution_number = self.entry.get_text().isdigit()
         if resolution_number is not False:
@@ -97,26 +98,7 @@ class MainWindow(Gtk.Window):
 
         self.button_about = Gtk.ToolButton(stock_id=Gtk.STOCK_ABOUT)
         self.button_about.connect("clicked", self.about_dialog)
-        #self.button1.connect("clicked", reveal_child)
         grid.attach(self.button_about, Gtk.PositionType.RIGHT, 2, 1, 1)
-        #grid = Gtk.Grid()
-        #vbox.add(grid)
-
-        #def reveal_child(button):
-            #if self.entry.get_text().isdigit() is False:
-                #revealer.set_reveal_child(True)
-            #else:
-                #revealer.set_reveal_child(False)
-
-        #revealer = Gtk.Revealer()
-        #revealer.set_reveal_child(False)
-        #grid.attach(revealer, 0, 0, 1, 1)
-
-        #label = Gtk.Label("       Type only numbers")
-        #revealer.add(label)
-        #button = Gtk.Button("Reveal")
-        #button.connect("clicked", reveal_child)
-        #grid.attach(button, 0, 1, 1, 1)
 
         label = Gtk.Label(label="From page:")
         grid.attach(label, Gtk.PositionType.LEFT, 3, 1, 1)
@@ -155,7 +137,6 @@ class MainWindow(Gtk.Window):
         #self.button1 = Gtk.Button(label="Select file")
         self.button1 = Gtk.ToolButton(stock_id=Gtk.STOCK_INDEX)
         self.button1.connect("clicked", self.button_clicked)
-        #self.button1.connect("clicked", reveal_child)
         vbox.pack_start(self.button1, True, True, 0)
 
 if __name__ == '__main__':
