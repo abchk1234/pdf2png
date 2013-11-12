@@ -11,7 +11,7 @@ class MainWindow(Gtk.Window):
 
         aboutdialog.set_program_name("pdf2img")
         aboutdialog.set_version("v0.2")
-        aboutdialog.set_comments("Convert PDF to multiple images\nin various formats with a single mouse click\n\nSpecial thanks to Aaditya")
+        aboutdialog.set_comments("Convert PDF easily to multiple images\nin various formats with a single mouse click\n\nSpecial thanks to Aaditya")
         aboutdialog.set_website("http://linux.sytes.net/")
         aboutdialog.set_website_label("Developer Website")
         aboutdialog.set_copyright("(c) Aaron Caffrey, 2013")
