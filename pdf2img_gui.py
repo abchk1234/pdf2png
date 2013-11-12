@@ -8,10 +8,10 @@ class MainWindow(Gtk.Window):
 
     def about_dialog(self, widget):
         aboutdialog = Gtk.AboutDialog()
-        aboutdialog.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
-        aboutdialog.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1, 1, 0, 1))
+        #aboutdialog.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
+        #aboutdialog.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1, 1, 0, 1))
         aboutdialog.set_program_name("pdf2img")
-        aboutdialog.set_version("v0.2")
+        #aboutdialog.set_version("v0.2")
         aboutdialog.set_comments("Convert easily PDF to multiple images\nin various formats with a single mouse click\n\nSpecial thanks to Aaditya")
         aboutdialog.set_website("http://linux.sytes.net/")
         aboutdialog.set_website_label("Developer Website")
