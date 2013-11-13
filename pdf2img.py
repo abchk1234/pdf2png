@@ -428,7 +428,7 @@ Public License instead of this License.
         Gtk.Window.__init__(self, title="PDF to IMG")
 
         self.connect("delete-event", self.delete_event)
-        #self.set_icon_from_file(program_icon)
+        self.set_icon_from_file(program_icon)
         self.set_border_width(6)
         self.set_size_request(200, 20)
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
