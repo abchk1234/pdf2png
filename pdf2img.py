@@ -8,6 +8,17 @@ program_icon = "/usr/share/icons/pdf2img_icon.png"
 
 class MainWindow(Gtk.Window):
 
+    def delete_event(self,window,event):
+        self.hide_on_delete()
+        return True
+
+    @staticmethod
+    def tray_icon_clicked(self,status):
+        self.win.show()
+        StatusIcon = Gtk.StatusIcon()
+        StatusIcon.set_from_file(program_icon)
+        StatusIcon.connect('activate', TrayIcon.show_program)
+
     @staticmethod
     def about_dialog(self, widget):
         aboutdialog = Gtk.AboutDialog()
@@ -413,17 +424,6 @@ Public License instead of this License.
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sp.communicate()
 
-    def delete_event(self,window,event):
-        self.hide_on_delete()
-        return True
-
-    @staticmethod
-    def tray_icon_clicked(self,status):
-        self.win.show()
-        StatusIcon = Gtk.StatusIcon()
-        StatusIcon.set_from_file(program_icon)
-        StatusIcon.connect('activate', TrayIcon.show_program)
-
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to IMG")
 
@@ -517,13 +517,13 @@ class TrayIcon(Gtk.StatusIcon):
         show_program.connect("activate", self.show_program)
         menu.append(show_program)
 
-        about_item = Gtk.MenuItem("About")
-        about_item.connect("activate", self.show_about)
-        menu.append(about_item)
+        show_about_option = Gtk.MenuItem("About")
+        show_about_option.connect("activate", self.show_about)
+        menu.append(show_about_option)
 
-        quit_item = Gtk.MenuItem("Quit")
-        quit_item.connect("activate", self.quit, "file.quit")
-        menu.append(quit_item)
+        show_quit_option = Gtk.MenuItem("Quit")
+        show_quit_option.connect("activate", self.quit, "file.quit")
+        menu.append(show_quit_option)
         menu.show_all()
 
         self.connect("activate", self.show_program)
