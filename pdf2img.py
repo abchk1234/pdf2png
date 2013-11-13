@@ -1,17 +1,21 @@
 #!/usr/bin/python
 import os
+import sys
 import subprocess
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
+program_icon = "/usr/share/icons/pdf2img_icon.png"
 
 class MainWindow(Gtk.Window):
 
+    @staticmethod
     def about_dialog(self, widget):
         aboutdialog = Gtk.AboutDialog()
         #aboutdialog.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
         #aboutdialog.override_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(1, 1, 0, 1))
+        aboutdialog.set_logo(GdkPixbuf.Pixbuf.new_from_file(program_icon))
+        #aboutdialog.set_logo_icon_name(Gtk.STOCK_ABOUT)
         aboutdialog.set_program_name("pdf2img")
-        aboutdialog.set_logo_icon_name(Gtk.STOCK_ABOUT)
         #aboutdialog.set_version("v0.2")
         aboutdialog.set_comments("Convert easily PDF to multiple images\nin various formats with a single mouse click\n")
         aboutdialog.set_website("http://linux.sytes.net/")
@@ -386,7 +390,7 @@ Public License instead of this License.
             filename = chooser_dialog.get_filename()
 
             if filename is not None:
-                self.pdf_to_png(chooser_dialog, filename)
+                self.pdf_to_img(chooser_dialog, filename)
             chooser_dialog.destroy()
         else:
             self.RaiseWarning()
@@ -400,7 +404,7 @@ Public License instead of this License.
         dialog.run()
         dialog.destroy()
 
-    def pdf_to_png(self, chooser_dialog, pdffilepath):
+    def pdf_to_img(self, chooser_dialog, pdffilepath):
         pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
         resolution = self.entry.get_text()
         arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage=%s" % self.spinbutton.get_text(), "-dLastPage=%s" % self.spinbutton2.get_text(),
@@ -409,12 +413,25 @@ Public License instead of this License.
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sp.communicate()
 
+    def delete_event(self,window,event):
+        self.hide_on_delete()
+        return True
+
+    @staticmethod
+    def tray_icon_clicked(self,status):
+        self.win.show()
+        StatusIcon = Gtk.StatusIcon()
+        StatusIcon.set_from_file(program_icon)
+        StatusIcon.connect('activate', TrayIcon.show_program)
+
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to IMG")
+
+        self.connect("delete-event", self.delete_event)
+        #self.set_icon_from_file(program_icon)
         self.set_border_width(6)
         self.set_size_request(200, 20)
         self.override_background_color(Gtk.StateFlags.NORMAL, Gdk.RGBA(0, 0, 0, 1))
-
         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(vbox)
 
@@ -436,7 +453,7 @@ Public License instead of this License.
         grid.attach(label, Gtk.PositionType.RIGHT, 1, 1, 1)
 
         self.button_about = Gtk.ToolButton(stock_id=Gtk.STOCK_ABOUT)
-        self.button_about.connect("clicked", self.about_dialog)
+        self.button_about.connect("clicked", self.about_dialog, "about")
         grid.attach(self.button_about, Gtk.PositionType.RIGHT, 2, 1, 1)
 
         label = Gtk.Label(label="From page:")
@@ -486,8 +503,47 @@ Public License instead of this License.
         self.button1.connect("clicked", self.button_clicked)
         vbox.pack_start(self.button1, True, True, 0)
 
+class TrayIcon(Gtk.StatusIcon):
+    def __init__(self, win):
+        Gtk.StatusIcon.__init__(self)
+        self.win = win
+        self.set_from_file(program_icon)
+        self.set_tooltip_text("PDF to IMG")
+        self.set_visible(True)
+
+        self.menu = menu = Gtk.Menu()
+
+        show_program = Gtk.MenuItem("Show pdf2img")
+        show_program.connect("activate", self.show_program)
+        menu.append(show_program)
+
+        about_item = Gtk.MenuItem("About")
+        about_item.connect("activate", self.show_about)
+        menu.append(about_item)
+
+        quit_item = Gtk.MenuItem("Quit")
+        quit_item.connect("activate", self.quit, "file.quit")
+        menu.append(quit_item)
+        menu.show_all()
+
+        self.connect("activate", self.show_program)
+        self.connect('popup-menu', self.icon_clicked)
+
+    def show_program(self, widget, event=None):
+        MainWindow.tray_icon_clicked(self, widget)
+
+    def show_about(self, widget, event=None):
+        MainWindow.about_dialog(self, widget)
+
+    def icon_clicked(self, status, button, time):
+        self.menu.popup(None, None, None, None, button, time)
+
+    def quit(self, widget, event=None):
+        sys.exit(0)
+
 if __name__ == '__main__':
     win = MainWindow()
     win.connect("delete-event", Gtk.main_quit)
     win.show_all()
+    TrayIcon(win)
     Gtk.main()
