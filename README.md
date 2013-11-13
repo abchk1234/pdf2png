@@ -1,6 +1,6 @@
 pdf2img
 =======
-<img src="img/pdf2img.png" alt="" /><img src="img/tray.png" alt="" /><img src="img/pdf2img-two.png" alt="" />
+<img src="img/pdf2img.png" alt="" /><img src="img/pdf2img-two.png" alt="" /><img src="img/tray.png" alt="" />
 
 The conversion of PDF to image has never been easier task, but with pdf2img you have the opportunity to do this with a single mouse click. pdf2img supports up to 4 different image extensions and 10 different sdevices.
 
