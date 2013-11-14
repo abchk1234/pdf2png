@@ -8,17 +8,6 @@ program_icon = "/usr/share/icons/pdf2img_icon.png"
 
 class MainWindow(Gtk.Window):
 
-    def delete_event(self,window,event):
-        self.hide_on_delete()
-        return True
-
-    @staticmethod
-    def tray_icon_clicked(self,status):
-        self.win.show()
-        StatusIcon = Gtk.StatusIcon()
-        StatusIcon.set_from_file(program_icon)
-        StatusIcon.connect('activate', TrayIcon.show_program)
-
     @staticmethod
     def about_dialog(self, widget):
         aboutdialog = Gtk.AboutDialog()
@@ -427,7 +416,6 @@ Public License instead of this License.
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to IMG")
 
-        self.connect("delete-event", self.delete_event)
         self.set_icon_from_file(program_icon)
         self.set_border_width(6)
         self.set_size_request(200, 20)
@@ -503,47 +491,8 @@ Public License instead of this License.
         self.button1.connect("clicked", self.button_clicked)
         vbox.pack_start(self.button1, True, True, 0)
 
-class TrayIcon(Gtk.StatusIcon):
-    def __init__(self, win):
-        Gtk.StatusIcon.__init__(self)
-        self.win = win
-        self.set_from_file(program_icon)
-        self.set_tooltip_text("PDF to IMG")
-        self.set_visible(True)
-
-        self.menu = menu = Gtk.Menu()
-
-        show_program = Gtk.MenuItem("Show pdf2img")
-        show_program.connect("activate", self.show_program)
-        menu.append(show_program)
-
-        show_about_option = Gtk.MenuItem("About")
-        show_about_option.connect("activate", self.show_about)
-        menu.append(show_about_option)
-
-        show_quit_option = Gtk.MenuItem("Quit")
-        show_quit_option.connect("activate", self.quit, "file.quit")
-        menu.append(show_quit_option)
-        menu.show_all()
-
-        self.connect("activate", self.show_program)
-        self.connect('popup-menu', self.icon_clicked)
-
-    def show_program(self, widget, event=None):
-        MainWindow.tray_icon_clicked(self, widget)
-
-    def show_about(self, widget, event=None):
-        MainWindow.about_dialog(self, widget)
-
-    def icon_clicked(self, status, button, time):
-        self.menu.popup(None, None, None, None, button, time)
-
-    def quit(self, widget, event=None):
-        sys.exit(0)
-
 if __name__ == '__main__':
     win = MainWindow()
     win.connect("delete-event", Gtk.main_quit)
     win.show_all()
-    TrayIcon(win)
     Gtk.main()
