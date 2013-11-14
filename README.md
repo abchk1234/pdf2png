@@ -8,6 +8,16 @@ Once you download the program, before starting it copy img/pdf2img_icon.png to /
 
     sudo cp img/pdf2img_icon.png /usr/share/icons
 
+##How To
+
+Increasing or decreasing the resolution will change the image quality.
+
+Once given correct numbers for the From page and To page, click on Select PDF file to open a dialog window to browse and select the wanted PDF book, and click on Convert to convert the selected pages.
+
+It would convert the pdf and output the image(s) in the same directory where the pdf resides.
+
+##Credits
+
 Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so Thanks to him :)
 
 This has minor chnages from his version like no tray icon and some colorised fields.
