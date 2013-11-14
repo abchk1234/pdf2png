@@ -8,7 +8,7 @@ Once you download the program, before starting it copy img/pdf2img_icon.png to /
 
     sudo cp img/pdf2img_icon.png /usr/share/icons
 
-<i>Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a></i>, so Thanks to him :)
+Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so Thanks to him :)
 
 This has minor chnages from his version like no tray icon and some colorised fields.
 
