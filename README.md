@@ -8,9 +8,9 @@ Once you download the program, before starting it copy img/pdf2img_icon.png to /
 
     sudo cp img/pdf2img_icon.png /usr/share/icons
 
-Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a> so Thanks to him :)
+<i>Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a></i>, so Thanks to him :)
 
-This has minor chnages from his version like no tray icon and some colorised fileds.
+This has minor chnages from his version like no tray icon and some colorised fields.
 
 For Arch Linux users check out <a href="https://aur.archlinux.org/packages/pdf2img-git/">pdf2img-git</a> in the AUR.
 ## Requirements
