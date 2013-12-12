@@ -1,4 +1,4 @@
-pdf2img
+About
 =======
 
 With pdf2img you have the opportunity to convert PDF to image with a single mouse click. pdf2img supports up to 4 different image extensions and 10 different sdevices.
