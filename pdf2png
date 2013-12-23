@@ -10,11 +10,11 @@ class MainWindow(Gtk.Window):
     def about_dialog(self, widget):
         aboutdialog = Gtk.AboutDialog()
         aboutdialog.set_logo_icon_name(Gtk.STOCK_ABOUT)
-        aboutdialog.set_program_name("pdf2img")
-        #aboutdialog.set_version("v0.2")
-        aboutdialog.set_comments("Convert easily PDF to multiple images\nin various formats with a single mouse click\n")
+        aboutdialog.set_program_name("pdf2png")
+        aboutdialog.set_version("v0.2")
+        aboutdialog.set_comments("Convert PDF to multiple images in various formats\nlike PNG with a single mouse click\n")
         aboutdialog.set_website("https://github.com/aadityabagga/pdf2png")
-        aboutdialog.set_website_label("Website")
+        aboutdialog.set_website_label("Website\n")
         aboutdialog.set_authors(["Aaron", "\nSpecial thanks to:\nAaditya"])
         aboutdialog.set_license("""This program is free software;
 you can redistribute it and/or modify it under the terms
@@ -98,7 +98,7 @@ for more details.""")
         sp.communicate()
 
     def __init__(self):
-        Gtk.Window.__init__(self, title="PDF to IMG")
+        Gtk.Window.__init__(self, title="PDF to PNG")
 
         self.set_border_width(6)
         self.set_size_request(200, 20)

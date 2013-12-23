@@ -1,7 +1,7 @@
 About
 =======
 
-With pdf2img you have the opportunity to convert PDF to image with a single mouse click. pdf2img supports up to 4 different image extensions and 10 different sdevices.
+With pdf2png you have the opportunity to convert PDF to image with a single mouse click. pdf2png supports up to 4 different image extensions like PNG,JPEG,BMP and TIFF.
 
 ##How To
 
@@ -13,15 +13,15 @@ It would convert the pdf and output the image(s) in the same directory where the
 
 ##Credits
 
-Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so Thanks to him :)
+Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2img</a>, so Thanks to him :)
 
 This has minor chnages from his version like no tray icon and no over-riding of the system theme.
 
-For Arch Linux users check out <a href="https://aur.archlinux.org/packages/pdf2img-git/">pdf2img-git</a> in the AUR.
+For Arch Linux users check out <a href="https://aur.archlinux.org/packages/pdf2png/">pdf2png</a> in the AUR.
 
 ## Requirements
 
 * python 
 * ghostscript
-* python-gobject (for debian is python-gi)
+* python-gobject (for debian its python-gi)
 * webkitgtk, pywebkitgtk

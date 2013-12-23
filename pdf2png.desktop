@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Pdf2img
-Exec=pdf2img
+Name=Pdf2png
+Exec=pdf2png
 Comment="Convert PDF books to PNG, JPG and other image formats easily"
-Icon=/usr/share/pixmaps/pdf2img.png
+Icon=/usr/share/pixmaps/pdf2png.png
 NoDisplay=false
 Type=Application
 Categories=Graphics;
