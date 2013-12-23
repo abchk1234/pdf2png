@@ -17,10 +17,10 @@ class MainWindow(Gtk.Window):
         aboutdialog.set_website_label("Website")
         aboutdialog.set_authors(["Aaron", "\nSpecial thanks to:\nAaditya"])
         aboutdialog.set_license("""This program is free software;
-you can redistribute itand/or modify it under the terms
-of the GNU General Public License as published by the 
-Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
+you can redistribute it and/or modify it under the terms
+of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
 See http://www.gnu.org/licenses/gpl.html
 for more details.""")
         aboutdialog.run()

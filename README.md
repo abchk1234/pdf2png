@@ -15,9 +15,10 @@ It would convert the pdf and output the image(s) in the same directory where the
 
 Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so Thanks to him :)
 
-This has minor chnages from his version like no tray icon and some colorised fields.
+This has minor chnages from his version like no tray icon and no over-riding of the system theme.
 
 For Arch Linux users check out <a href="https://aur.archlinux.org/packages/pdf2img-git/">pdf2img-git</a> in the AUR.
+
 ## Requirements
 
 * python 
