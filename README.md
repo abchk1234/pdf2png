@@ -1,7 +1,7 @@
 About
 =======
 
-With pdf2png you have the opportunity to convert PDF to image with a single mouse click. pdf2png supports up to 4 different image extensions like PNG,JPEG,BMP and TIFF.
+With pdf2png you have the opportunity to convert PDF to image with a single mouse click. pdf2png supports up to 4 different image extensions like PNG, JPEG, BMP and TIFF.
 
 ##How To
 
@@ -22,7 +22,6 @@ This has minor chnages from his version like no tray icon and no over-riding of 
 * python 
 * ghostscript
 * python-gobject (for debian its python-gi)
-* webkitgtk, pywebkitgtk
 
 ## Installation
 
