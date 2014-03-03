@@ -1,7 +1,7 @@
 About
 =======
 
-pdf2png converts PDF files to image format with a simple graphical interface based on python, using ghostscript.
+pdf2png converts PDF files to various image formats with a simple graphical interface based on python, using ghostscript.
 
 ##How To
 
