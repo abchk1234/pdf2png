@@ -14,7 +14,7 @@ class MainWindow(Gtk.Window):
         aboutdialog.set_version("v0.2")
         aboutdialog.set_comments("Convert PDF to multiple images in various formats\nlike PNG with a single mouse click\n")
         aboutdialog.set_website("https://github.com/aadityabagga/pdf2png")
-        aboutdialog.set_website_label("For more details, see Website\n")
+        aboutdialog.set_website_label("Website\n")
         aboutdialog.set_authors(["Aaron", "\nSpecial thanks to:\nAaditya"])
         aboutdialog.set_license("""This program is free software;
 you can redistribute it and/or modify it under the terms
@@ -94,13 +94,13 @@ for more details.""")
         arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}_page_%01d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         sp.communicate()
-	sub = range(int(self.spinbutton2.get_text())+2 - int(self.spinbutton.get_text()))
+        sub = range(int(self.spinbutton2.get_text())+2 - int(self.spinbutton.get_text()))
         ran1 = range(int(self.spinbutton.get_text())-1, int(self.spinbutton2.get_text())+1)
-	for (x, z) in (zip(ran1, sub)):
-		if z==0:
-			continue
-		else:
-			os.system('mv "{0}_page_{1}.{2}"'.format(pdfname, z, self.comboboxtext2.get_active_text()) + ' "{0} page {1}.{2}"'.format(pdfname, x, self.comboboxtext2.get_active_text()))
+        for (x, z) in (zip(ran1, sub)):
+                if z==0:
+                        continue
+                else:
+                        os.system('mv "{0}_page_{1}.{2}"'.format(pdfname, z, self.comboboxtext2.get_active_text()) + ' "{0} page {1}.{2}"'.format(pdfname, x, self.comboboxtext2.get_active_text()))
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
@@ -120,7 +120,7 @@ for more details.""")
 
         self.entry = Gtk.Entry()
         self.entry.set_width_chars(1)
-        self.entry.set_text("200")
+        self.entry.set_text("150")
         self.entry.set_max_length(4)
         grid.attach(self.entry, Gtk.PositionType.LEFT, 2, 1, 1)
 

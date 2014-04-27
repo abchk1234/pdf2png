@@ -15,6 +15,6 @@ install: all
 	$(INSTALL) -d $(DESTDIR)$(bindir)
 	$(INSTALL) -d $(DESTDIR)$(icons)
 	$(INSTALL) -d $(DESTDIR)$(appdir)
-	$(INSTALL) -m755 pdf2png $(DESTDIR)$(bindir)
+	$(INSTALL) -m755 pdf2png.py $(DESTDIR)$(bindir)/pdf2png
 	$(INSTALL) -m644 pdf2png.png $(DESTDIR)$(icons)
 	$(INSTALL) -m644 pdf2png.desktop $(DESTDIR)$(appdir)
