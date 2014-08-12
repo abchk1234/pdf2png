@@ -27,9 +27,12 @@ This has minor chnages from his version like no tray icon and no over-riding of 
 
 ## Installation
 
-Install it with:
+Install it as:
 
-sudo make install
+(as root)
+# make install
+
+(or)
+$ sudo make install
 
 For Arch Linux users check out <a href="https://aur.archlinux.org/packages/pdf2png/">pdf2png</a> in the AUR.
-
