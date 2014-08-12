@@ -27,7 +27,7 @@ This has minor chnages from his version like no tray icon and no over-riding of 
 
 ## Installation
 
-Install it as:
+Install it:
 
 (as root)
  # make install
