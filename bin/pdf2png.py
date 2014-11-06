@@ -73,6 +73,7 @@ for more details.""")
 
                 if response == Gtk.ResponseType.OK:
                     self.pdf_to_img(chooser_dialog, filename)
+
                 if response == Gtk.ResponseType.CANCEL:
                     pass
                 chooser_dialog.destroy()
@@ -89,7 +90,8 @@ for more details.""")
         dialog.destroy()
 
     def pdf_to_img(self, chooser_dialog, pdffilepath):
-        pdfname, ext = os.path.splitext(chooser_dialog.get_filename())
+        pdffile = chooser_dialog.get_filename()
+        pdfname, ext = os.path.splitext(pdffile)
         resolution = self.entry.get_text()
         arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}_page_%01d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -100,7 +102,10 @@ for more details.""")
                 if z==0:
                         continue
                 else:
-                        os.system('mv "{0}_page_{1}.{2}"'.format(pdfname, z, self.comboboxtext2.get_active_text()) + ' "{0} page {1}.{2}"'.format(pdfname, x, self.comboboxtext2.get_active_text()))
+                        os.system('mv "{0}_page_{1}.{2}"'.format(pdfname, z, self.comboboxtext2.get_active_text()) + ' "{0}-page_{1}.{2}"'.format(pdfname, x, self.comboboxtext2.get_active_text()))
+        # Open the directory in which the pdf file and converted images are
+        pdfdir = os.path.dirname(pdffile)
+        subprocess.call(["exo-open", pdfdir])
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
