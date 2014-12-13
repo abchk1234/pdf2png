@@ -102,7 +102,7 @@ for more details.""")
             dialog2.format_secondary_text("{0}".format(err))
             dialog2.run()
             dialog2.destroy()
-        # The output if in the form of name-page1, name-page2, ... even though input pages may have been from 3 to 5
+        # The output is in the form of page1, page2, .., even though input pages may have been from 3 to 5
         # So we move the output pages in terms of input ones
         # Pages are renamed in reverse order so they do not overlap
         # previous pages get overwritten, ie, if there was a page 1 before, it would get probably get overwritten..
