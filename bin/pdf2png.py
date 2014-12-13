@@ -94,19 +94,38 @@ for more details.""")
         pdffile = chooser_dialog.get_filename()
         pdfname, ext = os.path.splitext(pdffile)
         resolution = self.entry.get_text()
-        arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}_page_%01d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
+        arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}-page%d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
         sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        sp.communicate()
-        sub = range(int(self.spinbutton2.get_text())+2 - int(self.spinbutton.get_text()))
-        ran1 = range(int(self.spinbutton.get_text())-1, int(self.spinbutton2.get_text())+1)
-        for (x, z) in (zip(ran1, sub)):
-                if z==0:
-                        continue
-                else:
-                        os.system('mv "{0}_page_{1}.{2}"'.format(pdfname, z, self.comboboxtext2.get_active_text()) + ' "{0}-page_{1}.{2}"'.format(pdfname, x, self.comboboxtext2.get_active_text()))
+        out, err = sp.communicate()
+        if err:
+            dialog2 = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, "Warning!")
+            dialog2.format_secondary_text("{0}".format(err))
+            dialog2.run()
+            dialog2.destroy()
+        # The output if in the form of name-page1, name-page2, ... even though input pages may have been from 3 to 5
+        # So we move the output pages in terms of input ones
+        # Pages are renamed in reverse order so they do not overlap
+        # previous pages get overwritten, ie, if there was a page 1 before, it would get probably get overwritten..
+        x = int(self.spinbutton.get_text()) # input page no. lower value
+        y = int(self.spinbutton2.get_text()) # input page no. upper value
+        z = y - x + 1 # no of pages to be renamed
+        e = self.comboboxtext2.get_active_text() # extension of output file
+        while y >= x:
+            if y == 1:
+                break # single (first) page
+            else:
+                os.system('mv -f "{0}-page{1}.{2}"'.format(pdfname, z, e) + ' "{0}-page{1}.{2}"'.format(pdfname, y, e))
+            z = z - 1
+            y = y - 1
+
+        dialog2 = Gtk.MessageDialog(self, 0, Gtk.MessageType.INFO, Gtk.ButtonsType.OK, "Processed!")
+        dialog2.format_secondary_text("Converted page(s) placed with the original file.\nTry refreshing the folder if they do not appear.")
+        dialog2.run()
+        dialog2.destroy()
+
         # Open the directory in which the pdf file and converted images are
-        pdfdir = os.path.dirname(pdffile)
-        subprocess.call(["exo-open", pdfdir])
+        #pdfdir = os.path.dirname(pdffile)
+        #subprocess.call(["exo-open", pdfdir])
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
@@ -129,7 +148,7 @@ for more details.""")
 
         self.entry = Gtk.Entry()
         self.entry.set_width_chars(1)
-        self.entry.set_text("150")
+        self.entry.set_text("200")
         self.entry.set_max_length(4)
         grid.attach(self.entry, Gtk.PositionType.LEFT, 2, 1, 1)
 
