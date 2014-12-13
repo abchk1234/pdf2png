@@ -94,9 +94,12 @@ for more details.""")
         pdffile = chooser_dialog.get_filename()
         pdfname, ext = os.path.splitext(pdffile)
         resolution = self.entry.get_text()
-        arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}-page%d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
-        sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        out, err = sp.communicate()
+        if os.path.exists('/usr/bin/gs'):
+            arglist = ["gs", "-dBATCH", "-dNOPAUSE", "-dFirstPage={0}".format(self.spinbutton.get_text()), "-dLastPage={0}".format(self.spinbutton2.get_text()), "-sOutputFile={0}-page%d.{1}".format(pdfname, self.comboboxtext2.get_active_text()), "-sDEVICE={0}".format(self.comboboxtext.get_active_text()),"-r{0}".format(resolution), pdffilepath]
+            sp = subprocess.Popen(args=arglist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out, err = sp.communicate()
+        else:
+            err = 'gs (GhostScript) not available for conversion'
         if err:
             dialog2 = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, "Warning!")
             dialog2.format_secondary_text("{0}".format(err))
