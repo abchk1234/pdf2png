@@ -4,6 +4,8 @@ import sys
 import subprocess
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
+program_icon = "/usr/share/pixmaps/pdf2png.png"
+
 class MainWindow(Gtk.Window):
 
     @staticmethod
@@ -73,7 +75,6 @@ for more details.""")
 
                 if response == Gtk.ResponseType.OK:
                     self.pdf_to_img(chooser_dialog, filename)
-
                 if response == Gtk.ResponseType.CANCEL:
                     pass
                 chooser_dialog.destroy()
@@ -109,6 +110,9 @@ for more details.""")
 
     def __init__(self):
         Gtk.Window.__init__(self, title="PDF to PNG")
+
+        if os.path.isfile(program_icon):
+            self.set_icon_from_file(program_icon)
 
         self.set_border_width(6)
         self.set_size_request(200, 20)
