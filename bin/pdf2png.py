@@ -101,7 +101,7 @@ for more details.""")
         else:
             err = 'gs (GhostScript) not available for conversion'
         if err:
-            dialog2 = Gtk.MessageDialog(self, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, "Warning!")
+            dialog2 = Gtk.MessageDialog(chooser_dialog, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, "Warning!")
             dialog2.format_secondary_text("{0}".format(err))
             dialog2.run()
             dialog2.destroy()
