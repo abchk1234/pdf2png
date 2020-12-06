@@ -14,7 +14,7 @@ class MainWindow(Gtk.Window):
         aboutdialog.set_logo_icon_name(Gtk.STOCK_ABOUT)
         aboutdialog.set_program_name("pdf2png")
         aboutdialog.set_version("v0.5")
-        aboutdialog.set_comments("Convert PDF to multiple images in various formats\nlike PNG with a single mouse click\n")
+        aboutdialog.set_comments("Convert PDFs to images in formats\nlike PNG with a single mouse click\n")
         aboutdialog.set_website("https://github.com/abchk1234/pdf2png")
         aboutdialog.set_website_label("Website\n")
         aboutdialog.set_authors(["Aaron", "\nSpecial thanks to:\nAaditya"])
