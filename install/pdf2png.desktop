@@ -2,7 +2,7 @@
 Name=Pdf2png
 Exec=pdf2png
 Comment="Convert PDF books to PNG, JPG and other image formats easily"
-Icon=/usr/share/pixmaps/pdf2png.png
+Icon=pdf2png
 NoDisplay=false
 Type=Application
 Categories=Graphics;
