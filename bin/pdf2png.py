@@ -152,7 +152,7 @@ for more details.""")
 
         self.entry = Gtk.Entry()
         self.entry.set_width_chars(1)
-        self.entry.set_text("200")
+        self.entry.set_text("300")
         self.entry.set_max_length(4)
         grid.attach(self.entry, Gtk.PositionType.LEFT, 2, 1, 1)
 
