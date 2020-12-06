@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Pdf2png
 Exec=pdf2png
-Comment="Convert PDF books to PNG, JPG and other image formats easily"
+Comment="Convert PDFs to PNG, JPG and other image formats"
 Icon=pdf2png
 NoDisplay=false
 Type=Application
