@@ -21,6 +21,7 @@ This has minor chnages from his version like no tray icon and no over-riding of 
 
 ## Requirements
 
+* GTK 3
 * python 3
 * ghostscript
 * python-gobject (for debian its python-gi)

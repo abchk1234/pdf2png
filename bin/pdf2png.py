@@ -1,7 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import os
 import sys
 import subprocess
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 program_icon = "/usr/share/pixmaps/pdf2png.png"
@@ -13,7 +15,7 @@ class MainWindow(Gtk.Window):
         aboutdialog = Gtk.AboutDialog()
         aboutdialog.set_logo_icon_name(Gtk.STOCK_ABOUT)
         aboutdialog.set_program_name("pdf2png")
-        aboutdialog.set_version("v0.5")
+        aboutdialog.set_version("v0.5.3")
         aboutdialog.set_comments("Convert PDFs to images in formats\nlike PNG with a single mouse click\n")
         aboutdialog.set_website("https://github.com/abchk1234/pdf2png")
         aboutdialog.set_website_label("Website\n")

@@ -1,5 +1,5 @@
 NAME = pdf2png
-VERSION = 0.5
+VERSION = 0.5.3
 SHELL = /bin/bash
 INSTALL = /usr/bin/install
 MSGFMT = /usr/bin/msgfmt
