@@ -15,9 +15,9 @@ The converted image(s) are placed in the same directory where the pdf resides.
 
 ## Credits
 
-Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so Thanks to him :)
+Forked from WifiExtender's <a href="https://github.com/wifiextender/pdf2png">pdf2png</a>, so thanks to him.
 
-This has minor chnages from his version like no tray icon and no over-riding of the system theme.
+This has minor changes from his version like no tray icon and no over-riding of the system theme.
 
 ## Requirements
 
